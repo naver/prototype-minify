@@ -1,0 +1,35 @@
+{
+  "name": "prototype-minify",
+  "version": "1.0.0",
+  "description": "Minify prototype for typescript or unminfited prototype.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daybrush/prototype-minify.git"
+  },
+  "author": "Daybrush",
+  "license": "MIT",
+  "keywords": [
+    "daybrush",
+    "minify",
+    "rollup",
+    "webpack",
+    "typescript",
+    "prototype",
+    "minification",
+    "plugin"
+  ],
+  "bugs": {
+    "url": "https://github.com/daybrush/prototype-minify/issues"
+  },
+  "homepage": "https://github.com/daybrush/prototype-minify#readme",
+  "dependencies": {
+    "@babel/generator": "^7.1.2",
+    "@babel/parser": "^7.1.2",
+    "@babel/traverse": "^7.1.0",
+    "@babel/types": "^7.1.2"
+  }
+}
