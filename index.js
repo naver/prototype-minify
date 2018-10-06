@@ -23,6 +23,23 @@ function insertProto(body, i, name) {
     t.variableDeclarator( t.identifier("__proto"), t.memberExpression(t.identifier(name), t.identifier("prototype")))
   ]));
 }
+function changeAssignment(path, name) {
+  // Scene.prototype.method = function () {}
+  if(path.operator !== "=") {
+    return false;
+  }
+  
+  var left = path.left;
+  var members = names(left);
+  // Scene.prototype
+  if (members[0] === name && members[1] === "prototype") {
+    // Scene.prototype.method => __proto.method
+    left.object = t.identifier("__proto");
+    return true;
+  }
+  return false;
+  
+}
 module.exports = function PrototypeMinify(filename, code, sourcemap) {
   var ast = parser.parse(code, {
     sourceType: "module",
@@ -32,11 +49,23 @@ module.exports = function PrototypeMinify(filename, code, sourcemap) {
   traverse(ast, {
     FunctionDeclaration: function (path) {
       var name = path.node.id.name;
-      var isFirst = false;
+      var firstIndex = -1;
       var body = path.parent.body;
 
       body && body.forEach(function (innerPath, i) {
-        
+        // if (innerPath.type === "ReturnStatement" && innerPath.argument.type === "SequenceExpression") {
+        //   innerPath.argument.expressions.forEach(function (assignmentPath) {
+        //     if (assignmentPath.type === "AssignmentExpression") {
+        //       var assignment = changeAssignment(assignmentPath, name);
+        //       if(assignment) {
+        //         if (firstIndex === -1) {
+        //           firstIndex = i;
+        //         }
+        //       }
+        //     }
+        //   });
+        //   return;
+        // }
         if (innerPath.type !== "ExpressionStatement") {
           return;
         }
@@ -55,34 +84,30 @@ module.exports = function PrototypeMinify(filename, code, sourcemap) {
             prototypeNames[1] !== "prototype") {
             return;
           }
-          if (!isFirst) {
-            insertProto(body, i, name);
-            isFirst = true;
+          if (firstIndex === -1) {
+            firstIndex = i;
           }
           expression.arguments[0] = t.identifier("__proto");
         }
-        // Scene.prototype.method = function () {}
-        if(expression.type !== "AssignmentExpression" && expression.operator !== "=") {
-          return;
-        }
-        var left = expression.left;
-        var members = names(left);
-
-        // Scene.prototype
-        if (members[0] === name && members[1] === "prototype") {
-          if (!isFirst) {
-            insertProto(body, i, name);
-            isFirst = true;
+        if (expression.type === "AssignmentExpression") {
+          var assignment = changeAssignment(expression, name);
+          if(assignment) {
+            if (firstIndex === -1) {
+              firstIndex = i;
+            }
+            return;
           }
-          // Scene.prototype.method => __proto.method
-          left.object = t.identifier("__proto");
         }
       });
+      firstIndex !== -1 && insertProto(body, firstIndex, name);
       path.skip();
       path.parentPath.skip();
     },
   });
-  var output = generate(ast, {sourceMaps: sourcemap}, code);
+  var output = generate(ast, {
+    sourceMaps: sourcemap,
+    retainLines: true,
+  }, code);
 
   return output
 }
