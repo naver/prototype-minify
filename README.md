@@ -2,6 +2,10 @@
 
 Minify prototype for typescript or unminfited prototype.
 
+```sh
+$ npm i prototype-minify
+```
+
 |Before|After|
 |:---:|:---:|
 |![](./before.png)|![](./after.png)|
