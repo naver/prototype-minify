@@ -106,7 +106,6 @@ module.exports = function PrototypeMinify(filename, code, sourcemap) {
   });
   var output = generate(ast, {
     sourceMaps: sourcemap,
-    retainLines: true,
   }, code);
 
   return output
