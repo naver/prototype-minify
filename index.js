@@ -17,9 +17,9 @@ function names(member) {
   }
   return arr;
 }
-function insertProto(body, i, name) {
+function insertProto(path, name) {
   // var __proto = Scene.prototype;
-  body.splice(i, 0, t.variableDeclaration("var", [
+  path.insertAfter(t.variableDeclaration("var", [
     t.variableDeclarator( t.identifier("__proto"), t.memberExpression(t.identifier(name), t.identifier("prototype")))
   ]));
 }
@@ -49,7 +49,7 @@ module.exports = function PrototypeMinify(filename, code, sourcemap) {
   traverse(ast, {
     FunctionDeclaration: function (path) {
       var name = path.node.id.name;
-      var firstIndex = -1;
+      var isProto = false;
       var body = path.parent.body;
 
       body && body.forEach(function (innerPath, i) {
@@ -84,22 +84,22 @@ module.exports = function PrototypeMinify(filename, code, sourcemap) {
             prototypeNames[1] !== "prototype") {
             return;
           }
-          if (firstIndex === -1) {
-            firstIndex = i;
+          if (!isProto) {
+            isProto = true;
           }
           expression.arguments[0] = t.identifier("__proto");
         }
         if (expression.type === "AssignmentExpression") {
           var assignment = changeAssignment(expression, name);
           if(assignment) {
-            if (firstIndex === -1) {
-              firstIndex = i;
+            if (!isProto) {
+              isProto = true;
             }
             return;
           }
         }
       });
-      firstIndex !== -1 && insertProto(body, firstIndex, name);
+      isProto && insertProto(path, name);
       path.skip();
       path.parentPath.skip();
     },
@@ -108,5 +108,5 @@ module.exports = function PrototypeMinify(filename, code, sourcemap) {
     sourceMaps: sourcemap,
   }, code);
 
-  return output
+  return output;
 }

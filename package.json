@@ -1,6 +1,6 @@
 {
   "name": "prototype-minify",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Minify prototype for typescript or unminfited prototype.",
   "main": "index.js",
   "scripts": {
