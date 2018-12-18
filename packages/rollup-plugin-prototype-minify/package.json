@@ -1,0 +1,30 @@
+{
+  "name": "rollup-plugin-prototype-minify",
+  "version": "1.0.4",
+  "description": "Minify prototype for typescript or unminfited prototype.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "minify",
+    "rollup",
+    "typescript",
+    "prototype",
+    "minification",
+    "plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daybrush/rollup-plugin-prototype-minify.git"
+  },
+  "author": "Daybrush",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daybrush/rollup-plugin-prototype-minify/issues"
+  },
+  "homepage": "https://github.com/daybrush/rollup-plugin-prototype-minify#readme",
+  "dependencies": {
+    "prototype-minify": "^1.0.0"
+  }
+}
