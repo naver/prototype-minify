@@ -1,5 +1,9 @@
+/*
+	Copyright (c) 2019 NAVER Corp.
+  MIT License 
+  https://github.com/naver/prototype-minify
+*/
 var minify = require("prototype-minify");
-
 
 module.exports = function PrototypeMinify(e) {
   var sourcemap = e.sourcemap;

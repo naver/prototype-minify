@@ -1,6 +1,7 @@
 /*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Daybrush @daybrush
+	Copyright (c) 2019 NAVER Corp.
+  MIT License 
+  https://github.com/naver/prototype-minify
 */
 var PrototypeMinify = require("prototype-minify");
 var WebpackSources = require("webpack-sources");

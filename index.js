@@ -1,3 +1,8 @@
+/*
+	Copyright (c) 2019 NAVER Corp.
+  MIT License 
+  https://github.com/naver/prototype-minify
+*/
 var parser = require("@babel/parser");
 var generate = require("@babel/generator").default;
 var traverse = require("@babel/traverse").default;
