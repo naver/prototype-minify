@@ -1,6 +1,6 @@
 # prototype-minify [![npm package](https://img.shields.io/npm/v/prototype-minify.svg)](https://www.npmjs.com/package/prototype-minify)
 
-Minify prototype for typescript or unminfited prototype.
+Minify prototype for typescript or unminfied prototype.
 
 > https://github.com/Microsoft/TypeScript/issues/9638
 >

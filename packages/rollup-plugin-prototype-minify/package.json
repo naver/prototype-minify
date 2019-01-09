@@ -1,7 +1,7 @@
 {
   "name": "rollup-plugin-prototype-minify",
   "version": "1.0.5",
-  "description": "Minify prototype for typescript or unminfited prototype.",
+  "description": "Minify prototype for typescript or unminfied prototype.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
