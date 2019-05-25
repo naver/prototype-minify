@@ -10,7 +10,10 @@ import PrototypeMinify from 'rollup-plugin-prototype-minify';
 
 export default {
   plugins: [
-    PrototypeMinify({sourcemap: true}),
+    PrototypeMinify({
+      sourcemap: true,
+      exclude: /node_modules/g,
+    }),
   ],
 }
 ```

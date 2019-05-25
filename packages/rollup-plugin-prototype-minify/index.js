@@ -7,6 +7,14 @@ var minify = require("prototype-minify");
 
 module.exports = function PrototypeMinify(e) {
   var sourcemap = e.sourcemap;
+  var exclude = e.exclude || /node_modules/g;
+
+  if (exclude.exec(id)) {
+      return {
+          code,
+          map: {mappings: ""},
+      };
+  }
 
   return {
     name: "prototype-minify",
