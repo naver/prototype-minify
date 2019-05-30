@@ -12,7 +12,7 @@ module.exports = function PrototypeMinify(e) {
   return {
     name: "prototype-minify",
     transform: function (code, id) {
-      if (exclude.exec(id)) {
+      if (id.match(exclude)) {
         return {
             code,
             map: {mappings: ""},
