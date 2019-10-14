@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-prototype-minify",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Minify prototype for typescript or unminfied prototype.",
   "main": "index.js",
   "scripts": {
@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/naver/prototype-minify/tree/master/packages/rollup-plugin-prototype-minify",
   "dependencies": {
-    "prototype-minify": "^1.0.0"
+    "prototype-minify": "^1.1.0"
   }
 }
